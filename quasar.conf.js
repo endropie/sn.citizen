@@ -6,6 +6,7 @@
 // Configuration for your app
 // https://quasar.dev/quasar-cli/quasar-conf-js
 /* eslint-env node */
+const path = require('path')
 
 module.exports = function (/* ctx */) {
   return {
@@ -19,8 +20,8 @@ module.exports = function (/* ctx */) {
     // --> boot files are part of "main.js"
     // https://quasar.dev/quasar-cli/boot-files
     boot: [
-
       'i18n',
+      'auth',
       'axios'
     ],
 
@@ -71,6 +72,12 @@ module.exports = function (/* ctx */) {
           loader: 'eslint-loader',
           exclude: /node_modules/
         })
+
+
+        cfg.resolve.alias = {
+          ...cfg.resolve.alias,
+          '@': path.resolve(__dirname, 'src')
+        }
       }
     },
 
@@ -93,7 +100,12 @@ module.exports = function (/* ctx */) {
       importStrategy: 'auto',
 
       // Quasar plugins
-      plugins: []
+      plugins: [
+        'Cookies',
+        'Dialog',
+        'Notify',
+        'Loading',
+      ]
     },
 
     // animations: 'all', // --- includes all animations

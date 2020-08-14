@@ -2,9 +2,18 @@
 const routes = [
   {
     path: '/',
-    component: () => import('layouts/MainLayout.vue'),
+    component: () => import('layouts/BaseLayout.vue'),
     children: [
       { path: '', component: () => import('pages/Index.vue') }
+    ]
+  },
+  {
+    path: '/account',
+    component: () => import('layouts/AccountLayout.vue'),
+    meta: { auth: true },
+    children: [
+      { path: '', component: () => import('pages/account/Index.vue') },
+      { path: 'dashboard', component: () => import('pages/account/Index.vue') }
     ]
   },
 

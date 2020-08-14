@@ -15,7 +15,8 @@
           Quasar App
         </q-toolbar-title>
 
-        <div>Quasar v{{ $q.version }}</div>
+        <!-- <div>Quasar v{{ $q.version }}</div> -->
+        <q-btn dense rounded flat icon="exit_to_app" @click="logout" />
       </q-toolbar>
     </q-header>
 
@@ -95,12 +96,21 @@ const linksData = [
 ]
 
 export default {
-  name: 'MainLayout',
+  name: 'AdminLayout',
   components: { EssentialLink },
   data () {
     return {
       leftDrawerOpen: false,
       essentialLinks: linksData
+    }
+  },
+  methods: {
+    logout () {
+      this.$q.dialog({ title: 'Confirm', message: 'are you sure logout ?' })
+        .onOk(() => {
+          this.$auth.logout()
+          this.$router.push('/')
+        })
     }
   }
 }
